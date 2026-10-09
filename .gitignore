@@ -1,0 +1,4 @@
+lab/
+__pycache__/
+.pytest_cache/
+data/*.report.json

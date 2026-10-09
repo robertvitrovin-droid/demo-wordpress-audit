@@ -1,0 +1,232 @@
+{
+ "url": "http://127.0.0.1:8088",
+ "date": "2026-10-09",
+ "lighthouse": {
+  "performance": 73,
+  "accessibility": 90,
+  "best-practices": 89,
+  "seo": 75
+ },
+ "metrics": {
+  "first-contentful-paint": "2.0 s",
+  "largest-contentful-paint": "2.3 s",
+  "total-blocking-time": "10 ms",
+  "cumulative-layout-shift": "0.978",
+  "speed-index": "2.0 s"
+ },
+ "core": "7.1.3",
+ "plugins": [
+  {
+   "name": "akismet",
+   "status": "inactive",
+   "version": "5.7.2",
+   "update_version": ""
+  },
+  {
+   "name": "classic-editor",
+   "status": "active",
+   "version": "1.5",
+   "update_version": "1.7.0"
+  },
+  {
+   "name": "contact-form-7",
+   "status": "active",
+   "version": "5.3.1",
+   "update_version": "6.2.1"
+  },
+  {
+   "name": "hello",
+   "status": "inactive",
+   "version": "1.7.2",
+   "update_version": ""
+  },
+  {
+   "name": "sqlite-database-integration",
+   "status": "inactive",
+   "version": "3.1.0",
+   "update_version": ""
+  }
+ ],
+ "themes": [
+  {
+   "name": "twentytwentyfive",
+   "status": "inactive",
+   "version": "1.5",
+   "update_version": ""
+  },
+  {
+   "name": "twentytwentyfour",
+   "status": "inactive",
+   "version": "1.6",
+   "update_version": ""
+  },
+  {
+   "name": "twentytwentyone",
+   "status": "active",
+   "version": "1.0",
+   "update_version": "2.9"
+  },
+  {
+   "name": "twentytwentythree",
+   "status": "inactive",
+   "version": "1.7",
+   "update_version": ""
+  }
+ ],
+ "findings": [
+  {
+   "area": "Безпека",
+   "severity": "high",
+   "title": "Відсутні заголовки безпеки",
+   "evidence": "Strict-Transport-Security, Content-Security-Policy, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy",
+   "fix": "Додати заголовки на рівні веб-сервера (nginx/Apache) або плагіном; почати з X-Content-Type-Options, Referrer-Policy, X-Frame-Options, HSTS після переходу на HTTPS."
+  },
+  {
+   "area": "Безпека",
+   "severity": "high",
+   "title": "Сайт працює без HTTPS",
+   "evidence": "http://127.0.0.1:8088",
+   "fix": "Встановити TLS-сертифікат (Let's Encrypt), 301-редірект на https, увімкнути HSTS."
+  },
+  {
+   "area": "Безпека",
+   "severity": "high",
+   "title": "PHP-помилки виводяться відвідувачам",
+   "evidence": "На головній видно Deprecated/Notice з повними шляхами до файлів",
+   "fix": "WP_DEBUG_DISPLAY=false, логувати у файл поза webroot; оновити плагіни, що генерують помилки."
+  },
+  {
+   "area": "Продуктивність",
+   "severity": "high",
+   "title": "Важкі неоптимізовані зображення",
+   "evidence": "hero0.jpg (6809 КБ), hero1.jpg (6810 КБ)",
+   "fix": "Стиснути та перевести у WebP/AVIF, задати розміри, srcset і loading='lazy'; ціль < 200 КБ на зображення."
+  },
+  {
+   "area": "Продуктивність",
+   "severity": "high",
+   "title": "Lighthouse Performance 73/100 (mobile)",
+   "evidence": "first-contentful-paint: 2.0 s, largest-contentful-paint: 2.3 s, total-blocking-time: 10 ms, cumulative-layout-shift: 0.978, speed-index: 2.0 s",
+   "fix": "Оптимізація зображень, кешування сторінок, відкладене завантаження JS/CSS, CDN."
+  },
+  {
+   "area": "Плагіни й оновлення",
+   "severity": "high",
+   "title": "Застарілі плагіни: 2",
+   "evidence": "classic-editor 1.5 → 1.7.0, contact-form-7 5.3.1 → 6.2.1",
+   "fix": "Зробити резервну копію, оновити на staging, перевірити форми й редактор, потім на production. Увімкнути автооновлення безпеки."
+  },
+  {
+   "area": "Безпека",
+   "severity": "medium",
+   "title": "Увімкнено XML-RPC",
+   "evidence": "/xmlrpc.php → 405",
+   "fix": "Вимкнути XML-RPC, якщо не використовуються Jetpack/мобільний застосунок (brute-force через system.multicall)."
+  },
+  {
+   "area": "Безпека",
+   "severity": "medium",
+   "title": "Перелік користувачів через REST API",
+   "evidence": "/wp-json/wp/v2/users → ['admin']",
+   "fix": "Обмежити endpoint users для неавторизованих; не використовувати логін 'admin'."
+  },
+  {
+   "area": "Безпека",
+   "severity": "medium",
+   "title": "Сторінка входу без захисту від перебору",
+   "evidence": "/wp-login.php доступна без обмежень/2FA",
+   "fix": "Ліміт спроб входу, 2FA для адміністраторів, за можливості — обмеження за IP."
+  },
+  {
+   "area": "SEO",
+   "severity": "medium",
+   "title": "Немає meta description",
+   "evidence": "головна сторінка",
+   "fix": "Задати унікальні description для ключових сторінок (Yoast/Rank Math або вручну)."
+  },
+  {
+   "area": "Доступність",
+   "severity": "medium",
+   "title": "Зображення без alt: 2",
+   "evidence": "tent/uploads/2026/10/hero0.jpg, tent/uploads/2026/10/hero1.jpg",
+   "fix": "Заповнити alt для змістовних зображень, alt='' для декоративних."
+  },
+  {
+   "area": "Доступність",
+   "severity": "medium",
+   "title": "Недостатній контраст тексту",
+   "evidence": "Lighthouse: color-contrast",
+   "fix": "Контраст тексту не менше 4.5:1 (WCAG AA)."
+  },
+  {
+   "area": "Плагіни й оновлення",
+   "severity": "medium",
+   "title": "Застарілі теми",
+   "evidence": "twentytwentyone 1.0 → 2.9",
+   "fix": "Оновити активну тему (через дочірню тему, щоб не втратити правки), видалити зайві."
+  },
+  {
+   "area": "Безпека",
+   "severity": "medium",
+   "title": "Адміністратор з логіном «admin»",
+   "evidence": "user_login=admin",
+   "fix": "Створити нового адміністратора з унікальним логіном, перенести контент, видалити «admin»."
+  },
+  {
+   "area": "Безпека",
+   "severity": "low",
+   "title": "Розкривається версія PHP",
+   "evidence": "X-Powered-By: PHP/8.4.26",
+   "fix": "expose_php = Off у php.ini."
+  },
+  {
+   "area": "Безпека",
+   "severity": "low",
+   "title": "Версія WordPress у коді сторінки",
+   "evidence": "WordPress 7.1.3",
+   "fix": "Прибрати meta generator (remove_action('wp_head','wp_generator')) та ?ver= у статиці."
+  },
+  {
+   "area": "Безпека",
+   "severity": "low",
+   "title": "Доступний readme.html",
+   "evidence": "/readme.html → 200",
+   "fix": "Видалити або заборонити доступ до readme.html, license.txt."
+  },
+  {
+   "area": "Безпека",
+   "severity": "low",
+   "title": "Енумерація авторів через ?author=",
+   "evidence": "http://127.0.0.1:8088/author/admin/",
+   "fix": "Блокувати ?author=N редіректом/правилом сервера."
+  },
+  {
+   "area": "SEO",
+   "severity": "low",
+   "title": "Кількість H1 на головній: 3",
+   "evidence": "Пекарня «Колосок» (лабораторний стенд); Ласкаво просимо; Свіжий хліб щодня",
+   "fix": "Один H1 на сторінку, далі логічна ієрархія H2–H3."
+  },
+  {
+   "area": "SEO",
+   "severity": "low",
+   "title": "Немає Open Graph-розмітки",
+   "evidence": "",
+   "fix": "Додати og:title/og:description/og:image для коректних прев'ю в соцмережах."
+  },
+  {
+   "area": "Доступність",
+   "severity": "low",
+   "title": "Неінформативні тексти посилань",
+   "evidence": "тут",
+   "fix": "Писати зміст посилання: «Замовити торт», а не «тут»."
+  },
+  {
+   "area": "Плагіни й оновлення",
+   "severity": "low",
+   "title": "Неактивні плагіни: 2",
+   "evidence": "akismet, hello",
+   "fix": "Видалити непотрібні плагіни — вони все одно можуть містити вразливості."
+  }
+ ]
+}
