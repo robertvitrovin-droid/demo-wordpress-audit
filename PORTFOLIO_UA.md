@@ -17,3 +17,5 @@
 **Результат.** 7-сторінковий PDF-звіт: 22 проблеми (6 високого, 8 середнього, 8 низького пріоритету), Lighthouse mobile 73 / 90 / 89 / 75, з таблицею плагінів і планом виправлень. Скрипти повторно використовуються для аудиту реального сайту за дозволом власника.
 
 **Ціна від:** 1 500 грн за аудит · виправлення за окремою оцінкою · термін від 1 дня
+
+**Посилання.** Код: https://github.com/robertvitrovin-droid/demo-wordpress-audit · PDF-звіт: https://github.com/robertvitrovin-droid/demo-wordpress-audit/blob/main/WP_AUDIT_REPORT_DEMO.pdf
